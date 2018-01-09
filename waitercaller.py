@@ -12,6 +12,11 @@ from flask.ext.login import current_user	#Flask-Extension-current_user
 
 from bitlyhelper import BitlyHelper	#Import the BitlyHelper class to shorten the URLs
 import config
+if config.test
+    from mockdbhelper import MockDBHelper as DBHelper
+else:
+    from dbhelper import DBHelper
+
 from mockdbhelper import MockDBHelper as DBHelper	#Import Mock-Database
 from passwordhelper import PasswordHelper	#Import PasswordHelper-Class
 from forms import LoginForm
@@ -117,7 +122,7 @@ def account_createtable():	#This route function belongs to the account
 
         tableid = DB.add_table(form.tablenumber.data, current_user.get_id()) #Flask Login function to get
 									     #the id of the current user
-        new_url = BH.shorten_url(config.base_url + "newrequest/" + tableid) #Creates the table URL shortend by bitly.
+        new_url = BH.shorten_url(config.base_url + "newrequest/" + str( tableid)) #Creates the table URL shortend by bitly.
         DB.update_table(tableid, new_url)
         return redirect(url_for('account'))
 
