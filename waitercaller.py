@@ -12,7 +12,7 @@ from flask.ext.login import current_user	#Flask-Extension-current_user
 
 from bitlyhelper import BitlyHelper	#Import the BitlyHelper class to shorten the URLs
 import config
-if config.test
+if config.test:
     from mockdbhelper import MockDBHelper as DBHelper
 else:
     from dbhelper import DBHelper
