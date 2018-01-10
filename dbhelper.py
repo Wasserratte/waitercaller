@@ -57,6 +57,6 @@ class DBHelper:
 
     def delete_request(self, request_id):
 
-        self.db.request.remove({"_id": ObjectId(request_id)})
+        self.db.requests.remove({"_id": ObjectId(request_id)})
 
 
