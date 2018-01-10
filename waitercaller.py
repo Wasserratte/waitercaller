@@ -166,9 +166,10 @@ def dashboard_resolve():
 
 @app.route("/newrequest/<tid>")	#tid is the tableid
 def new_request(tid):
-    DB.add_request(tid, datetime.datetime.now())	#Create a new request in our database which contains the 
-							#table id and current time.
-    return "Your request has been logged and a waiter will be with you shortly"
+    if DB.add_request(tid, datetime.datetime.now()):	#Create a new request in our database which contains the 
+        return "Your request has been logged and a waiter will be with you shortly" #table id and current time.
+
+    return "There is already a request pending for this table. Please be patient, a waiter will be there ASAP"
 
 
 

@@ -42,8 +42,14 @@ class DBHelper:
     def add_request(self, table_id, time):	#Inser creates new collection request, use data from collection table
 
         table = self.get_table(table_id)
-        self.db.requests.insert({"owner": table['owner'], "table_number": table['number'], "table_id": table_id, 
-            "time": time})
+
+        try:
+            self.db.requests.insert({"owner": table['owner'], "table_number": table['number'], "table_id": table_id, 
+                "time": time})
+            return True
+
+        except pymongo.errors.DuplicateKeyError:
+            return False
 
     def get_requests(self, owner_id):
 
